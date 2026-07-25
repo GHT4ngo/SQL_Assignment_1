@@ -12,6 +12,8 @@ VALUES
     ('Valid number',              '4707059376',   1),
     ('Valid number with dash',    '470705-9376',  1),
     ('Valid number with century', '194707059376', 1),
+    ('Later date in current year', '261201-0005',  1),
+    ('Valid number with plus',     '000101+0008',  1),
     ('Invalid checksum',          '4707059377',   0),
     ('Invalid date',              '9902301234',   0),
     ('Invalid character',         '470705-93X6',  0),

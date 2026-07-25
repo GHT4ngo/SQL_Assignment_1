@@ -56,13 +56,20 @@ BEGIN
         SET @BirthDate = TRY_CONVERT(DATE, LEFT(@Digits, 8), 112);
     ELSE
     BEGIN
-        -- Utgå från det senaste århundradet som inte ger ett framtida årtal.
+        -- Börja med innevarande århundrade.
         DECLARE @FullYear INT = (YEAR(@Today) / 100) * 100
                               + CAST(LEFT(@Digits, 2) AS INT);
-        IF @FullYear > YEAR(@Today) SET @FullYear = @FullYear - 100;
 
         SET @BirthDate = TRY_CONVERT(
             DATE, CONCAT(@FullYear, SUBSTRING(@Digits, 3, 4)), 112);
+
+        -- Om hela datumet ligger i framtiden tillhör det förra århundradet.
+        IF @BirthDate > @Today
+        BEGIN
+            SET @FullYear = @FullYear - 100;
+            SET @BirthDate = TRY_CONVERT(
+                DATE, CONCAT(@FullYear, SUBSTRING(@Digits, 3, 4)), 112);
+        END
 
         -- Ett plustecken flyttar datumet ett århundrade bakåt vid behov.
         IF @Separator = '+' AND @BirthDate IS NOT NULL
