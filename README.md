@@ -1,5 +1,9 @@
 # Swedish Personal Identity Number Validator
 
+> This project has moved to
+> [`sql-assignments/assignment-01-personnummer`](https://github.com/GHT4ngo/sql-assignments/tree/main/assignment-01-personnummer).
+> This repository is retained as a read-only archive.
+
 A small SQL Server function that validates Swedish personal identity numbers
 (`personnummer`). It checks the format, birth date and Luhn checksum.
 
